@@ -1,3 +1,7 @@
-/**
- * Created by sfanous on 12/24/16.
- */
+import {Router, Route, browserHistory, IndexRoute}from 'react-router'
+
+export default (
+    <Router history={browserHistory}>
+        <Route path="/" component={}/>
+    </Router>
+)
