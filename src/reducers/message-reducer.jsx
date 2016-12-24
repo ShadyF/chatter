@@ -16,6 +16,9 @@ const messageReducer = function (state = initialState, action) {
             newMessages.push(action.message);
             return Object.assign({}, state, {displayed_messages: newMessages})
 
+        case types.SEND_MESSAGE:
+            return Object.assign({}, state, {message_field: ''});
+
         default:
             return state
     }

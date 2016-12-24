@@ -15,3 +15,11 @@ export function addMessage(message) {
         message
     }
 }
+
+export function sendMessage(message){
+    "use strict";
+    return{
+        type: types.SEND_MESSAGE,
+        message
+    }
+}
