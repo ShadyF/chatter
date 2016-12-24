@@ -1,4 +1,4 @@
-import { combineReducers }from 'redux'
+import {combineReducers}from 'redux'
 
 import messageReducer from './message-reducer'
 import nameReducer from './name-reduces.jsx'

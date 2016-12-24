@@ -1,10 +1,10 @@
 import * as types from '../actions/action-types'
 
-const initialState = 'Unknown';
+const initialState = 'Anonymous';
 
-const nameReducer = function(state = initialState, action) {
+const nameReducer = function (state = initialState, action) {
     "use strict";
-    switch(action.type){
+    switch (action.type) {
         case types.ENTER_NAME_SUCCESS:
             return action.name;
 

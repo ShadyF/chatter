@@ -7,3 +7,11 @@ export function messageFieldUpdate(message) {
         message
     }
 }
+
+export function addMessage(message) {
+    "use strict";
+    return {
+        type: types.ADD_MESSAGE,
+        message
+    }
+}
