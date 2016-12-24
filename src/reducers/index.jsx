@@ -7,3 +7,5 @@ const reducers = combineReducers({
     display_name: nameReducer,
     messages: messageReducer
 });
+
+export default reducers
