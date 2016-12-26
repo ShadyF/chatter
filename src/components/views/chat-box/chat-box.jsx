@@ -1,3 +1,4 @@
+import React from 'react'
 import {FormGroup, InputGroup, Button, FormControl, Panel} from 'react-bootstrap'
 
 function createMessage(message, index) {
