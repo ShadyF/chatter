@@ -1,6 +1,6 @@
-import { createStore } from 'redux'
+import {createStore} from 'redux'
 import reducers from './reducers'
-import { initListener } from './chat'
+import {initListener} from './socket'
 
 const store = createStore(reducers);
 
