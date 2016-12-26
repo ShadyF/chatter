@@ -6,7 +6,7 @@ const initialState = {
     displayed_messages: []
 };
 
-const messageReducer = function (state = initialState, action) {
+export default function (state = initialState, action) {
     switch (action.type) {
         case types.MESSAGE_FIELD_UPDATE:
             return Object.assign({}, state, {message_field: action.message});

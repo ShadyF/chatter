@@ -2,7 +2,7 @@ import * as types from '../actions/action-types'
 
 const initialState = 'Anonymous';
 
-const nameReducer = function (state = initialState, action) {
+export default function (state = initialState, action) {
     switch (action.type) {
         case types.ENTER_NAME_SUCCESS:
             return action.name;
