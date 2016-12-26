@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'channels'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -51,6 +52,13 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'chatter.urls'
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "asgiref.inmemory.ChannelLayer",
+        "ROUTING": "chatter.routing.channel_routing",
+    },
+}
 
 TEMPLATES = [
     {
