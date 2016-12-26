@@ -17,9 +17,11 @@ export default function (state = initialState, action) {
             return Object.assign({}, state, {displayed_messages: newMessages});
 
         case types.SEND_MESSAGE:
-            socket.emit('message', {
-                message: state.message_field
-            });
+            let msg = {
+                type: "message",
+                text: state.message_field
+            };
+            socket.send(JSON.stringify(msg));
             return Object.assign({}, state, {message_field: ''});
 
         default:

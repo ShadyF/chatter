@@ -1,5 +1,4 @@
 import * as messageActions from './actions/message-actions'
-import io from 'socket.io-client'
 
 const host = 'localhost';
 const port = 8000;
@@ -8,11 +7,11 @@ let socket = null;
 
 function initListener(store) {
     "use strict";
-    socket = io.connect(host + ':' + port);
+    socket = new WebSocket(host + port + '/chat');
 
-    socket.on('message', message => {
-        store.dispatch(messageActions.addMessage(message));
-    })
+    socket.onmessage = message => {
+        store.dispatch(messageActions.addMessage(message.text));
+    };
 }
 
 export {initListener, socket}
