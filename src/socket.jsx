@@ -1,4 +1,4 @@
-import * as messageActions from 'actions/message-actions'
+import * as messageActions from './actions/message-actions'
 import io from 'socket.io-client'
 
 const host = 'localhost';
