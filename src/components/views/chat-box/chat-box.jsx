@@ -1,12 +1,12 @@
 import React from 'react'
-import {FormGroup, InputGroup, Button, FormControl, Panel} from 'react-bootstrap'
+import {FormGroup, InputGroup, Button, FormControl, Panel, ListGroup, ListGroupItem} from 'react-bootstrap'
 
 function createMessage(message, index) {
     "use strict";
     return (
-        <li key={'message-' + index} className="message-item">
+        <ListGroupItem key={'message-' + index} className="message-item">
             {message}
-        </li>
+        </ListGroupItem>
     )
 }
 
@@ -42,9 +42,9 @@ export default function ChatBox(props) {
     "use strict";
     return (
         <Panel footer={messageField(props)}>
-            <ol className="message-box">
+            <ListGroup className="message-list">
                 {props.messages.displayed_messages.map(createMessage)}
-            </ol>
+            </ListGroup>
         </Panel>
     )
 }
