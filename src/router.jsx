@@ -1,3 +1,4 @@
+import React from 'react'
 import {Router, Route, browserHistory, IndexRoute}from 'react-router'
 
 import MainLayout from './components/layouts/main-layout/main-layout'
