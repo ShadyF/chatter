@@ -16,10 +16,9 @@ export function addMessage(message) {
     }
 }
 
-export function sendMessage(message){
+export function sendMessage(){
     "use strict";
     return{
-        type: types.SEND_MESSAGE,
-        message
+        type: types.SEND_MESSAGE
     }
 }
