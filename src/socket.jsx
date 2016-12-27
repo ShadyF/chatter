@@ -10,7 +10,8 @@ function initListener(store) {
     socket = new ReconnectingWebsocket('ws://' + host + ':' + port + '/chat');
 
     socket.onmessage = message => {
-        store.dispatch(messageActions.addMessage(message.text));
+        // Parse message type here
+        store.dispatch(messageActions.addMessage(JSON.parse(message.data).text));
     };
 }
 
