@@ -6,7 +6,9 @@ def ws_connect(message):
 
 
 def ws_receive(message):
-    Group('chat').send(message)
+    Group('chat').send({
+        'text': message['text']
+    })
 
 
 def ws_disconnect(message):
