@@ -1,21 +1,28 @@
 import {connect} from 'react-redux'
 import ChatBox from '../views/chat-box/chat-box'
-import * as messageActions from '../../actions/chat-actions'
+import * as actions from '../../actions/chat-actions'
 
 const mapStateToProps = state => {
     return {
-        messages: state.messages
+        messages: state.chatState.displayed_messages,
+        handle_set: state.chatState.handle_set,
+        handle: state.chatState.handle
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         onMessageSend: () => {
-            dispatch(messageActions.sendMessage())
+            dispatch(actions.sendMessage())
         },
-        onMessageFieldChange: (message) =>{
-            "use strict";
-            dispatch(messageActions.messageFieldUpdate(message));
+        onMessageFieldChange: message =>{
+            dispatch(actions.messageFieldUpdate(message));
+        },
+        onHandleSet: () => {
+            dispatch(actions.setHandle())
+        },
+        onHandleUpdate: handle => {
+            dispatch(actions.handleUpdate(handle));
         }
     }
 };

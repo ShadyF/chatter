@@ -1,13 +1,18 @@
 import * as types from './action-types'
 
-export function setHandle(handle) {
+export function setHandle() {
     "use strict";
     return {
         type: types.SET_HANDLE,
+    }
+}
+export function handleUpdate(handle){
+    "use strict";
+    return {
+        type : types.HANDLE_UPDATE,
         handle
     }
 }
-
 export function addMessage(message) {
     "use strict";
     return {

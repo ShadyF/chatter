@@ -3,6 +3,7 @@ import {socket} from '../socket'
 
 const initialState = {
     handle: '',
+    handle_set: false,
     message_field: '',
     displayed_messages: []
 };
@@ -27,7 +28,10 @@ export default function (state = initialState, action) {
             return Object.assign({}, state, {message_field: ''});
 
         case types.SET_HANDLE:
-            return Object.assign({}, state, {handle: action.handle});
+            return Object.assign({}, state, {handle_set: true});
+
+        case types.HANDLE_UPDATE:
+            return Object.assign({}, state, {handle:action.handle});
 
         default:
             return state

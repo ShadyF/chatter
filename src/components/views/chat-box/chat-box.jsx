@@ -1,5 +1,16 @@
 import React from 'react'
-import {FormGroup, InputGroup, Button, FormControl, Panel, ListGroup, ListGroupItem} from 'react-bootstrap'
+import {
+    FormGroup,
+    InputGroup,
+    Button,
+    FormControl,
+    ControlLabel,
+    HelpBlock,
+    Panel,
+    ListGroup,
+    ListGroupItem,
+    Modal
+} from 'react-bootstrap'
 
 function createMessage(message, index) {
     "use strict";
@@ -10,14 +21,14 @@ function createMessage(message, index) {
     )
 }
 
-const messageField = (props) => {
+const messageField = props => {
     "use strict";
     return (
         <form>
             <FormGroup>
                 <InputGroup>
                     <FormControl type="text"
-                                 value={props.messages.message_field}
+                                 value={props.message_field}
                                  placeholder="Enter Message..."
                                  onChange={e => props.onMessageFieldChange(e.target.value)}
                     />
@@ -39,12 +50,39 @@ const messageField = (props) => {
 
 
 export default function ChatBox(props) {
-    "use strict";
     return (
-        <Panel footer={messageField(props)}>
-            <ListGroup className="message-list">
-                {props.messages.displayed_messages.map(createMessage)}
-            </ListGroup>
-        </Panel>
+        <div>
+            <Panel footer={messageField(props)}>
+                <ListGroup className="message-list">
+                    {props.messages.map(createMessage)}
+                </ListGroup>
+            </Panel>
+            <Modal show={!props.handle_set}>
+                <Modal.Header>
+                    <Modal.Title>Set your username!</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <form>
+                        <FormGroup>
+                            <ControlLabel>Username</ControlLabel>
+                            <FormControl type="text"
+                                         value={props.handle}
+                                         placeholder="Pick a username..."
+                                         onChange={e => props.onHandleUpdate(e.target.value)}/>
+                            <HelpBlock> Username should be greater than 2 characters</HelpBlock>
+                        </FormGroup>
+                        <Button type="submit"
+                                onClick={e => {
+                                    e.preventDefault();
+                                    props.onHandleSet();
+                                }}
+                                disabled={props.handle.length < 2}
+                        >
+                            Set Username
+                        </Button>
+                    </form>
+                </Modal.Body>
+            </Modal>
+        </div>
     )
 }
