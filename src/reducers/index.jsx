@@ -1,11 +1,9 @@
 import {combineReducers}from 'redux'
 
-import messageReducer from './message-reducer'
-import nameReducer from './name-reducer.jsx'
+import chatReducer from './chat-reducer'
 
 const reducers = combineReducers({
-    display_name: nameReducer,
-    messages: messageReducer
+    chatReducer
 });
 
 export default reducers

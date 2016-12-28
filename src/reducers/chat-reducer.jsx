@@ -2,6 +2,7 @@ import * as types from '../actions/action-types'
 import {socket} from '../socket'
 
 const initialState = {
+    handle: '',
     message_field: '',
     displayed_messages: []
 };
@@ -19,10 +20,14 @@ export default function (state = initialState, action) {
         case types.SEND_MESSAGE:
             let msg = {
                 type: "message",
-                text: state.message_field
+                message: state.message_field,
+                handle: state.handle
             };
             socket.send(JSON.stringify(msg));
             return Object.assign({}, state, {message_field: ''});
+
+        case types.SET_HANDLE:
+            return Object.assign({}, state, {handle: action.handle});
 
         default:
             return state

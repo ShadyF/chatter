@@ -1,6 +1,6 @@
 import {connect} from 'react-redux'
 import ChatBox from '../views/chat-box/chat-box'
-import * as messageActions from '../../actions/message-actions'
+import * as messageActions from '../../actions/chat-actions'
 
 const mapStateToProps = state => {
     return {

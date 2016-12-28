@@ -1,4 +1,4 @@
-import * as messageActions from './actions/message-actions'
+import * as messageActions from './actions/chat-actions'
 import ReconnectingWebsocket from './reconnecting-websocket'
 const host = 'localhost';
 const port = 8000;

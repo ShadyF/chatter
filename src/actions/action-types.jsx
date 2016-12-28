@@ -1,5 +1,6 @@
-export const ENTER_NAME_SUCCESS = 'ENTER_NAME_SUCCESS';
+export const SET_HANDLE = 'SET_HANDLE';
 
 export const ADD_MESSAGE = 'ADD_MESSAGE';
 export const SEND_MESSAGE = 'SEND_MESSAGE';
+
 export const MESSAGE_FIELD_UPDATE = 'MESSAGE_FIELD_UPDATE';
