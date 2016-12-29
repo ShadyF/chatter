@@ -1,0 +1,29 @@
+.message {
+  background-color: #019875;
+  color: #0F0F0F;
+
+  padding: 4px 8px;
+  margin: 2px;
+
+  border: none;
+  border-radius: 7px;
+
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, .2);
+
+  word-wrap: break-word;
+
+  display: block;
+  clear: left;
+  float: left;
+
+  &:first-child, &:last-child {
+    border-radius: 7px;
+  }
+
+  .handle {
+    font-size: 15px;
+    margin: 0;
+    line-height: inherit;
+    border-bottom: 1px solid white;
+  }
+}

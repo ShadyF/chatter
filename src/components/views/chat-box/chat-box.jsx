@@ -12,11 +12,14 @@ import {
     Modal
 } from 'react-bootstrap'
 
+import styles from './chat-box.scss'
+
 function createMessage(message, index) {
     "use strict";
     return (
-        <ListGroupItem key={'message-' + index} className="message-item">
-            {message}
+        <ListGroupItem key={'message-' + index} className={styles.message}>
+            <h5 className={styles.handle}>{message.handle}</h5>
+            <span className={styles.content}>{message.message}</span>
         </ListGroupItem>
     )
 }
@@ -27,18 +30,20 @@ const messageField = props => {
         <form>
             <FormGroup>
                 <InputGroup>
-                    <FormControl type="text"
-                                 value={props.message_field}
-                                 placeholder="Enter Message..."
-                                 onChange={e => props.onMessageFieldChange(e.target.value)}
+                    <FormControl
+                        type="text"
+                        value={props.message_field}
+                        placeholder="Enter Message..."
+                        onChange={e => props.onMessageFieldChange(e.target.value)}
                     />
                     <InputGroup.Button>
-                        <Button type="submit"
-                                onClick={e => {
-                                    e.preventDefault();
-                                    props.onMessageSend();
-                                }}
-                        >
+                        <Button
+                            type="submit"
+                            onClick={e => {
+                                e.preventDefault();
+                                props.onMessageSend();
+                            }
+                            }>
                             Send
                         </Button>
                     </InputGroup.Button>
@@ -57,7 +62,7 @@ export default function ChatBox(props) {
                     {props.messages.map(createMessage)}
                 </ListGroup>
             </Panel>
-            <Modal show={!props.handle_set}>
+            <Modal show={props.handle_set}>
                 <Modal.Header>
                     <Modal.Title>Set your username!</Modal.Title>
                 </Modal.Header>
@@ -65,19 +70,20 @@ export default function ChatBox(props) {
                     <form>
                         <FormGroup>
                             <ControlLabel>Username</ControlLabel>
-                            <FormControl type="text"
-                                         value={props.handle}
-                                         placeholder="Pick a username..."
-                                         onChange={e => props.onHandleUpdate(e.target.value)}/>
+                            <FormControl
+                                type="text"
+                                value={props.handle}
+                                placeholder="Pick a username..."
+                                onChange={e => props.onHandleUpdate(e.target.value)}/>
                             <HelpBlock> Username should be greater than 2 characters</HelpBlock>
                         </FormGroup>
-                        <Button type="submit"
-                                onClick={e => {
-                                    e.preventDefault();
-                                    props.onHandleSet();
-                                }}
-                                disabled={props.handle.length < 2}
-                        >
+                        <Button
+                            type="submit"
+                            onClick={e => {
+                                e.preventDefault();
+                                props.onHandleSet();
+                            }}
+                            disabled={props.handle.length < 2}>
                             Set Username
                         </Button>
                     </form>
