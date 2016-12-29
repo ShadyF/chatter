@@ -25,8 +25,17 @@ module.exports = {
                     presets: ['react', 'es2015']
                 }
             },
-            {test: /\.css$/, loader: "style!css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]"},
-            {test: /\.scss$/, loader: 'style!css?modules&importLoaders=2&sourceMap&localIdentName=[name]__[local]___[hash:base64:5]!sass?outputStyle=expanded&sourceMap'}
+            {
+                test: /\.css$/,
+                loader: "style!css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]"
+            },
+            {
+                test: /\.scss$/, loaders: [
+                'style-loader',
+                'css-loader?modules&importLoaders=2&sourceMap&localIdentName=[name]__[local]___[hash:base64:5]',
+                'postcss-loader',
+                'sass-loader?outputStyle=expanded&sourceMap']
+            }
         ]
     },
 
