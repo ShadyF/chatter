@@ -15,6 +15,16 @@ import {
 import moment from 'moment'
 import styles from './ChatBox.scss'
 
+const RGB = {
+    r: Math.floor(Math.random() * 220),
+    g: Math.floor(Math.random() * 220),
+    b: Math.floor(Math.random() * 220)
+};
+
+const randColor = {
+    color: "rgb(" + RGB.r + ", " + RGB.g + ", " + RGB.b + ")"
+};
+
 function createMessage(message, index) {
     "use strict";
     const handle = message.handle;
@@ -23,7 +33,7 @@ function createMessage(message, index) {
 
     return (
         <ListGroupItem key={'message-' + index} className={styles.message}>
-            <h5 className={styles.handle}>{message.handle}</h5>
+            <h5 className={styles.handle} style={randColor}>{message.handle}</h5>
             <span className={styles.content}>{message.message}</span>
             <small className={styles.timestamp}>{timestamp.format('LT')}</small>
         </ListGroupItem>
