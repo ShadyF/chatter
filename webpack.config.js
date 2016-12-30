@@ -6,24 +6,27 @@ module.exports = {
     //the base directory (absolute path) for resolving the entry option
     context: __dirname,
 
-    entry: ['./src/app'],
+    entry: [
+        // 'webpack-dev-server/client?http://localhost:8080', // WebpackDevServer host and port
+        // 'webpack/hot/only-dev-server',
+        './src/app'],
 
     output: {
         path: path.resolve('./build/'),
         filename: "bundle.js"
     },
 
-    plugins: [],
+    plugins: [
+        // new webpack.HotModuleReplacementPlugin()
+    ],
 
     module: {
         loaders: [
             {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
-                loader: 'babel-loader',
-                query: {
-                    presets: ['react', 'es2015']
-                }
+                // loaders: ['react-hot', 'babel']
+                loaders: ['babel']
             },
             {
                 test: /\.css$/,
@@ -45,6 +48,11 @@ module.exports = {
         //extensions that should be used to resolve modules
         extensions: ['', '.js', '.jsx']
     },
+
+    // devServer: {
+    //     hot: true,
+    //     contentBase: './',
+    // },
 
     devtool: 'source-map'
 };
