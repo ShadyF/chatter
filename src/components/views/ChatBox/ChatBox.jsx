@@ -12,7 +12,7 @@ import {
     Modal
 } from 'react-bootstrap'
 
-import styles from './chat-box.scss'
+import styles from './ChatBox.scss'
 
 function createMessage(message, index) {
     "use strict";
@@ -56,7 +56,7 @@ const messageField = props => {
 
 export default function ChatBox(props) {
     return (
-        <div>
+        <div className={styles.chatBox}>
             <Panel footer={messageField(props)}>
                 <ListGroup className="message-list">
                     {props.messages.map(createMessage)}

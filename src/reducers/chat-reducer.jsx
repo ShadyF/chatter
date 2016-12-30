@@ -1,5 +1,5 @@
 import * as types from '../actions/action-types'
-import {socket} from '../socket'
+import {socket} from '../utils/socket/socket'
 
 const initialState = {
     handle: '',

@@ -1,0 +1,11 @@
+:global(html), :global(body), :global(#root) {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+}
+
+.row {
+  height: 100%;
+}

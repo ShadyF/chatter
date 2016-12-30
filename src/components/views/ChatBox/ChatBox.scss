@@ -27,3 +27,14 @@
     border-bottom: 1px solid white;
   }
 }
+
+.chatBox {
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,.06), 0 2px 5px 0 rgba(0,0,0,.2);
+  margin: 0 auto;
+  height: calc(100% - 38px);
+  position: relative;
+  top: 19px;
+  :global(.panel) {
+    margin: 0;
+  }
+}
