@@ -6,6 +6,7 @@
   margin: 0;
 }
 
-.row {
+.wrapper, .wrapper > *, .wrapper > * > * {
   height: 100%;
+  background-color: darken(whitesmoke, 20%);
 }

@@ -39,6 +39,7 @@ const messageField = props => {
                     <InputGroup.Button>
                         <Button
                             type="submit"
+                            className={styles.sendButton}
                             onClick={e => {
                                 e.preventDefault();
                                 props.onMessageSend();

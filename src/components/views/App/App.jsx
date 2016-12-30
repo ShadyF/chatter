@@ -6,8 +6,8 @@ import styles from './App.scss'
 export default class App extends Component {
     render() {
         return (
-            <Grid fluid={true}>
-                <Row className={styles.row}>
+            <Grid className={styles.wrapper} fluid={true}>
+                <Row>
                     <Col md={6} mdOffset={3}>
                         {this.props.children}
                     </Col>
