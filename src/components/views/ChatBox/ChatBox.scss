@@ -30,7 +30,7 @@
         word-wrap: break-word;
 
         display: block;
-        clear: left;
+        clear: both;
         float: left;
 
         &:first-child, &:last-child {
@@ -52,6 +52,8 @@
         .timestamp {
           margin-left: 10px;
           font-size: 10px;
+          word-wrap: normal;
+          word-break: keep-all;
         }
       }
 
