@@ -11,7 +11,7 @@ function initListener(store) {
 
     socket.onmessage = message => {
         // Parse message type here
-        store.dispatch(messageActions.addMessage(JSON.parse(message.data).text));
+        store.dispatch(messageActions.addMessage(JSON.parse(message.data)));
     };
 }
 

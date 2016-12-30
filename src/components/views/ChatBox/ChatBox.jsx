@@ -12,14 +12,20 @@ import {
     Modal
 } from 'react-bootstrap'
 
+import moment from 'moment'
 import styles from './ChatBox.scss'
 
 function createMessage(message, index) {
     "use strict";
+    const handle = message.handle;
+    const text = message.message;
+    let timestamp = moment(message.timestamp);
+
     return (
         <ListGroupItem key={'message-' + index} className={styles.message}>
             <h5 className={styles.handle}>{message.handle}</h5>
             <span className={styles.content}>{message.message}</span>
+            <small className={styles.timestamp}>{timestamp.format('LT')}</small>
         </ListGroupItem>
     )
 }
@@ -60,10 +66,10 @@ export default function ChatBox(props) {
         <div className={styles.chatBox}>
             <Panel footer={messageField(props)}>
                 <ListGroup className="message-list">
-                    {props.messages.map(createMessage)}
+                    {props.displayed_messages.map(createMessage)}
                 </ListGroup>
             </Panel>
-            <Modal show={props.handle_set}>
+            <Modal show={!props.handle_set}>
                 <Modal.Header>
                     <Modal.Title>Set your username!</Modal.Title>
                 </Modal.Header>

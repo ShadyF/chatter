@@ -3,11 +3,7 @@ import ChatBox from '../views/ChatBox/ChatBox'
 import * as actions from '../../actions/chat-actions'
 
 const mapStateToProps = state => {
-    return {
-        messages: state.chatState.displayed_messages,
-        handle_set: state.chatState.handle_set,
-        handle: state.chatState.handle
-    }
+    return state.chatState
 };
 
 const mapDispatchToProps = dispatch => {
