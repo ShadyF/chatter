@@ -5,10 +5,7 @@ const initialState = {
     handle: '',
     handle_set: false,
     message_field: '',
-    displayed_messages: [{
-        handle: 'ShadyF',
-        message:'I like you and I want you right now'
-    }]
+    displayed_messages: []
 };
 
 export default function (state = initialState, action) {
