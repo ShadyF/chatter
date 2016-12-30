@@ -12,6 +12,7 @@ import {
     Modal
 } from 'react-bootstrap'
 
+import {TransitionMotion, spring} from 'react-motion'
 import moment from 'moment'
 import styles from './ChatBox.scss'
 
@@ -25,14 +26,20 @@ const randColor = {
     color: "rgb(" + RGB.r + ", " + RGB.g + ", " + RGB.b + ")"
 };
 
-function createMessage(message, index) {
+function createMessage(config) {
     "use strict";
+
+    const message = config.data;
+    const key = config.key;
+    const style = config.style;
+
     const handle = message.handle;
     const text = message.message;
-    let timestamp = moment(message.timestamp);
+    const timestamp = moment(message.timestamp);
 
     return (
-        <ListGroupItem key={'message-' + index} className={styles.message}>
+        <ListGroupItem key={key} className={styles.message}
+                       style={{transform: 'translateX(' + style.offset + '%)'}}>
             <h5 className={styles.handle} style={randColor}>{message.handle}</h5>
             <span className={styles.content}>{message.message}</span>
             <small className={styles.timestamp}>{timestamp.format('LT')}</small>
@@ -70,13 +77,33 @@ const messageField = props => {
     )
 };
 
+function willEnter() {
+    "use strict";
+    // Starting position, comes out from the left
+    return {offset: -100};
+}
 
 export default function ChatBox(props) {
     return (
         <div className={styles.chatBox}>
             <Panel footer={messageField(props)}>
                 <ListGroup className="message-list">
-                    {props.displayed_messages.map(createMessage)}
+                    <TransitionMotion
+                        willEnter={willEnter}
+                        styles={props.displayed_messages.map((msg, index) => ({
+                            // Must have these there keys
+                            // style corresponds to ending value
+                            data: msg,
+                            key: 'message-' + index,
+                            style: {offset: spring(0)},
+                        }))}>
+                        {interpolatedStyles =>
+                            // Must be wrapped in a div else an except will be thrown by react
+                            <div>
+                                {interpolatedStyles.map(createMessage)}
+                            </div>
+                        }
+                    </TransitionMotion>
                 </ListGroup>
             </Panel>
             <Modal show={!props.handle_set}>
