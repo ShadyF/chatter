@@ -23,7 +23,9 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 SECRET_KEY = os.environ.get("SECRET_KEY", "".join(random.choice(string.printable) for i in range(40)))
+print(os.environ.get("DEBUG", False))
 DEBUG = bool(os.environ.get("DEBUG", False))
+print(DEBUG)
 
 ALLOWED_HOSTS = ['*']
 
