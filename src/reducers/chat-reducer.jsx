@@ -20,10 +20,11 @@ export default function (state = initialState, action) {
 
         case types.SEND_MESSAGE:
             let msg = {
-                type: "message",
                 message: state.message_field,
-                handle: state.handle
+                handle: state.handle,
+                socketid: sessionStorage.getItem('socketid')
             };
+
             socket.send(JSON.stringify(msg));
             return Object.assign({}, state, {message_field: ''});
 
@@ -31,7 +32,7 @@ export default function (state = initialState, action) {
             return Object.assign({}, state, {handle_set: true});
 
         case types.HANDLE_UPDATE:
-            return Object.assign({}, state, {handle:action.handle});
+            return Object.assign({}, state, {handle: action.handle});
 
         default:
             return state

@@ -65,11 +65,11 @@ export default class ChatBox extends Component {
         const handle = message.handle;
         const text = message.message;
         const timestamp = moment(message.timestamp);
-
+        const socketid = sessionStorage.getItem('socketid');
         return (
-            <ListGroupItem key={key} className={styles.message}
+            <ListGroupItem key={key} className={message.ownMessage ? styles.ownMessage : styles.message}
                            style={{transform: 'translateX(' + style.offset + '%)'}}>
-                <h5 className={styles.handle} style={this.randColor}>{message.handle}</h5>
+                {!message.ownMessage && <h5 className={styles.handle} style={this.randColor}>{message.handle}</h5>}
                 <span className={styles.content}>{message.message}</span>
                 <small className={styles.timestamp}>{timestamp.format('LT')}</small>
             </ListGroupItem>
@@ -105,16 +105,18 @@ export default class ChatBox extends Component {
         )
     }
 
-    static willEnter() {
-        // Starting position, comes out from the left
-        return {offset: -100};
+    static willEnter(config) {
+        // Starting position, comes out from the left if not user's own message
+        // comes out from the right if message is indeed the user's own message
+        const message = config.data;
+        return message.ownMessage ? {offset: 100} : {offset: -100};
     }
 
     render() {
         return (
             <div className={styles.chatBox}>
                 <Panel footer={this.getMessageField()}>
-                    <ScrollBars ref="scrollBar">
+                    <ScrollBars ref="scrollBar" style={{overflow: 'hidden'}} renderTrackHorizontal={() => <div></div>}>
                         <ListGroup>
                             <TransitionMotion
                                 willEnter={ChatBox.willEnter}

@@ -10,8 +10,22 @@ function initListener(store) {
     socket = new ReconnectingWebsocket('ws://' + host + ':' + port + '/chat');
 
     socket.onmessage = message => {
-        // Parse message type here
-        store.dispatch(messageActions.addMessage(JSON.parse(message.data)));
+        let messageObject = JSON.parse(message.data);
+
+        switch (messageObject.type) {
+            case 'id':
+                sessionStorage.setItem('socketid', messageObject.socketid);
+                break;
+            case 'message':
+                const ownSocketid = sessionStorage.getItem('socketid');
+                const messageSocketid = messageObject.socketid;
+
+                Object.assign(messageObject, {ownMessage: ownSocketid === messageSocketid});
+                store.dispatch(messageActions.addMessage(messageObject));
+                break;
+            default:
+                break;
+        }
     };
 }
 
