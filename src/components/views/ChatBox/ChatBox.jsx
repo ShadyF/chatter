@@ -1,5 +1,8 @@
 import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
+import {TransitionMotion, spring} from 'react-motion'
+import ScrollBars from 'react-custom-scrollbars'
+import moment from 'moment'
 import {
     FormGroup,
     InputGroup,
@@ -13,8 +16,6 @@ import {
     Modal
 } from 'react-bootstrap'
 
-import {TransitionMotion, spring} from 'react-motion'
-import moment from 'moment'
 import styles from './ChatBox.scss'
 
 export default class ChatBox extends Component {
@@ -36,9 +37,14 @@ export default class ChatBox extends Component {
     }
 
     componentDidUpdate() {
-        const node = ReactDOM.findDOMNode(this.refs.list).firstChild;
+        const {scrollBar} = this.refs;
+
         const scrollOffsetTrigger = 150;
-        this.shouldScrollBottom = node.scrollTop + node.offsetHeight > node.scrollHeight - scrollOffsetTrigger;
+        const scrollTop = scrollBar.getScrollTop();
+        const clientHeight = scrollBar.getClientHeight();
+        const scrollHeight = scrollBar.getScrollHeight();
+
+        this.shouldScrollBottom = scrollTop + clientHeight > scrollHeight - scrollOffsetTrigger;
 
         if (this.shouldScrollBottom) {
             // To ensure DOM element has actually been rendered and not only virtually by the render() method
@@ -46,9 +52,8 @@ export default class ChatBox extends Component {
             // render() update due to componentDidUpdate() getting called after render() has virtually modified DOM
             // but not in the browser
             window.requestAnimationFrame(() => {
-                node.scrollTop = node.scrollHeight;
+                scrollBar.scrollTop(scrollHeight);
             })
-
         }
     }
 
@@ -108,25 +113,27 @@ export default class ChatBox extends Component {
     render() {
         return (
             <div className={styles.chatBox}>
-                <Panel ref="list" footer={this.getMessageField()}>
-                    <ListGroup>
-                        <TransitionMotion
-                            willEnter={ChatBox.willEnter}
-                            styles={this.props.displayed_messages.map((msg, index) => ({
-                                // Must have these there keys
-                                // style corresponds to ending value
-                                data: msg,
-                                key: 'message-' + index,
-                                style: {offset: spring(0)},
-                            }))}>
-                            {interpolatedStyles =>
-                                // Must be wrapped in a div else an except will be thrown by react
-                                <div>
-                                    {interpolatedStyles.map(this.createMessage)}
-                                </div>
-                            }
-                        </TransitionMotion>
-                    </ListGroup>
+                <Panel footer={this.getMessageField()}>
+                    <ScrollBars ref="scrollBar">
+                        <ListGroup>
+                            <TransitionMotion
+                                willEnter={ChatBox.willEnter}
+                                styles={this.props.displayed_messages.map((msg, index) => ({
+                                    // Must have these there keys
+                                    // style corresponds to ending value
+                                    data: msg,
+                                    key: 'message-' + index,
+                                    style: {offset: spring(0)},
+                                }))}>
+                                {interpolatedStyles =>
+                                    // Must be wrapped in a div else an except will be thrown by react
+                                    <div>
+                                        {interpolatedStyles.map(this.createMessage)}
+                                    </div>
+                                }
+                            </TransitionMotion>
+                        </ListGroup>
+                    </ScrollBars>
                 </Panel>
                 <Modal show={!this.props.handle_set}>
                     <Modal.Header>

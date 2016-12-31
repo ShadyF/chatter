@@ -23,6 +23,7 @@
     "postcss-loader": "^1.2.1",
     "react": "^15.4.1",
     "react-bootstrap": "^0.30.7",
+    "react-custom-scrollbars": "^4.0.0",
     "react-dom": "^15.4.1",
     "react-motion": "^0.4.7",
     "react-redux": "^5.0.1",
