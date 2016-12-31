@@ -2,11 +2,18 @@ import json
 from channels import Group
 from django.core.serializers.json import DjangoJSONEncoder
 
-from .serializers import MessageSerializer
+from .serializers import IDSerializer, MessageSerializer
 
 
 def ws_connect(message):
-    Group('chat').add(message.reply_channel)
+    id_response = IDSerializer(data={'socketid': message.reply_channel.name})
+
+    if id_response.is_valid():
+        message.reply_channel.send({
+            "text": json.dumps(id_response.validated_data)
+        })
+
+        Group('chat').add(message.reply_channel)
 
 
 def ws_receive(message):
