@@ -42,22 +42,24 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'chatter.urls'
 
-# CHANNEL_LAYERS = {
-#     "default": {
-#         "BACKEND": "asgiref.inmemory.ChannelLayer",
-#         "ROUTING": "chatter.routing.channel_routing",
-#     },
-# }
-
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "asgi_redis.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
+if DEBUG:
+    CHANNEL_LAYERS = {
+        "default": {
+            "BACKEND": "asgiref.inmemory.ChannelLayer",
+            "ROUTING": "chatter.routing.channel_routing",
         },
-        "ROUTING": "chatter.routing.channel_routing",
-    },
-}
+    }
+
+else:
+    CHANNEL_LAYERS = {
+        "default": {
+            "BACKEND": "asgi_redis.RedisChannelLayer",
+            "CONFIG": {
+                "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
+            },
+            "ROUTING": "chatter.routing.channel_routing",
+        },
+    }
 
 WSGI_APPLICATION = 'chatter.wsgi.application'
 
