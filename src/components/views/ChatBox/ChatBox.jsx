@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import ReactDOM from 'react-dom'
 import {
     FormGroup,
     InputGroup,
@@ -32,6 +33,23 @@ export default class ChatBox extends Component {
 
         // Needed because create message access randColor
         this.createMessage = this.createMessage.bind(this);
+    }
+
+    componentDidUpdate() {
+        const node = ReactDOM.findDOMNode(this.refs.list).firstChild;
+        const scrollOffsetTrigger = 150;
+        this.shouldScrollBottom = node.scrollTop + node.offsetHeight > node.scrollHeight - scrollOffsetTrigger;
+
+        if (this.shouldScrollBottom) {
+            // To ensure DOM element has actually been rendered and not only virtually by the render() method
+            // removing window.requestAnimationFrame() will result in autoscrolling getting delayed by a single
+            // render() update due to componentDidUpdate() getting called after render() has virtually modified DOM
+            // but not in the browser
+            window.requestAnimationFrame(() => {
+                node.scrollTop = node.scrollHeight;
+            })
+
+        }
     }
 
     createMessage(config) {
@@ -90,8 +108,8 @@ export default class ChatBox extends Component {
     render() {
         return (
             <div className={styles.chatBox}>
-                <Panel footer={this.getMessageField()}>
-                    <ListGroup className="message-list">
+                <Panel ref="list" footer={this.getMessageField()}>
+                    <ListGroup>
                         <TransitionMotion
                             willEnter={ChatBox.willEnter}
                             styles={this.props.displayed_messages.map((msg, index) => ({
