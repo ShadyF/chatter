@@ -31,9 +31,17 @@ module.exports = {
                 loaders: ['babel']
             },
             {
+                test: /\.css$/,
+                loader: "style!css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]"
+            },
+            {
                 test: /\.scss$/,
                 loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=2&sourceMap1!postcss!sass?outputStyle=expanded&sourceMap=true&sourceMapContents=true')
-            }
+            },
+            { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url?limit=10000&mimetype=application/font-woff" },
+            { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/octet-stream" },
+            { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: "file" },
+            { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=image/svg+xml" },
         ]
     },
 
