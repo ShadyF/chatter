@@ -12,3 +12,9 @@
   height: 100%;
   background-color: $app-bg;
 }
+
+.col{
+  @media(max-width: 768px){
+    padding: 0;
+  }
+}

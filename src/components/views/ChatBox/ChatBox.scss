@@ -3,18 +3,27 @@
 .chatBox {
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .06), 0 2px 5px 0 rgba(0, 0, 0, .2);
   margin: 0 auto;
-  height: calc(100% - 38px);
   position: relative;
-  top: 19px;
+  top: 0;
+  height: 100%;
+
+  @media (min-width: 769px) {
+    top: 19px;
+    height: calc(100% - 38px);
+  }
 
   :global(.panel) {
     margin: 0;
     height: 100%;
+
+    @media (max-width: 768px){
+      border: none;
+    }
+
     :global(.panel-body) {
       padding: 12px 6px;
       height: calc(100% - 70px);
       background-color: $chatbox-body-bg;
-
       .message {
         background-color: $message-bg;
         color: $message-color;

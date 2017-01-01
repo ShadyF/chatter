@@ -8,7 +8,7 @@ export default class App extends Component {
         return (
             <Grid className={styles.wrapper} fluid={true}>
                 <Row>
-                    <Col md={6} mdOffset={3}>
+                    <Col md={6} mdOffset={3} className={styles.col}>
                         {this.props.children}
                     </Col>
                 </Row>
