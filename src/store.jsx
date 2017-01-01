@@ -4,8 +4,12 @@ import {initListener} from './utils/socket/socket'
 
 // const store = createStore(reducers);
 
+let store = null;
 // For redux-devtools chrome extension
-const store = createStore(reducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+if (__DEVTOOLS__)
+    store = createStore(reducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+else
+    store = createStore(reducers);
 
 // Initialize socket listener and attach our store to it
 initListener(store);
