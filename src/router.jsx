@@ -4,7 +4,7 @@ import {Router, Route, browserHistory, hashHistory, IndexRoute}from 'react-route
 import {AppContainer, ChatBoxContainer} from './components'
 
 export default (
-    <Router history={hashHistory}>
+    <Router history={browserHistory}>
         <Route path="/" component={AppContainer}>
             <IndexRoute component={ChatBoxContainer}/>
         </Route>
