@@ -4,24 +4,18 @@ var webpack = require('webpack');
 var CleanPlugin = require('clean-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+//the base directory (absolute path) for resolving the entry option
 var projectRootPath = __dirname;
 
 module.exports = {
     devtool: 'cheap-module-source-map',
 
-    //the base directory (absolute path) for resolving the entry option
-    context: __dirname,
-
-    entry: [
-        // 'webpack-dev-server/client?http://localhost:8080', // WebpackDevServer host and port
-        // 'webpack/hot/only-dev-server',
-        './src/app'],
+    entry: ['./src/app'],
 
     output: {
         path: path.resolve('./build/'),
         filename: "bundle.js"
     },
-
 
     module: {
         loaders: [
@@ -38,10 +32,10 @@ module.exports = {
                 test: /\.scss$/,
                 loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=2&sourceMap1!postcss!sass?outputStyle=expanded&sourceMap=true&sourceMapContents=true')
             },
-            { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url?limit=10000&mimetype=application/font-woff" },
-            { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/octet-stream" },
-            { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: "file" },
-            { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=image/svg+xml" },
+            {test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url?limit=10000&mimetype=application/font-woff"},
+            {test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/octet-stream"},
+            {test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: "file"},
+            {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=image/svg+xml"},
         ]
     },
 
@@ -57,7 +51,11 @@ module.exports = {
     plugins: [
         //A webpack plugin to remove/clean your build folder(s) before building
         new CleanPlugin(['build'], {root: projectRootPath}),
+
+        // Extract css styles into a separate file
         new ExtractTextPlugin('styles.css', {allChunks: true}),
+
+        // Make node_env switch to production, drastically decreases bundle size
         new webpack.DefinePlugin({
             'process.env': {
                 'NODE_ENV': JSON.stringify('production'),
@@ -74,9 +72,4 @@ module.exports = {
             }
         })
     ]
-    // devServer: {
-    //     hot: true,
-    //     contentBase: './',
-    // },
-
 };

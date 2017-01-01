@@ -2,11 +2,11 @@
 var path = require('path');
 var webpack = require('webpack');
 
+//the base directory (absolute path) for resolving the entry option
+var projectRootPath = __dirname;
+
 module.exports = {
     devtool: 'inline-source-map',
-
-    //the base directory (absolute path) for resolving the entry option
-    context: __dirname,
 
     entry: [
         'webpack-dev-server/client?http://localhost:8080', // WebpackDevServer host and port
@@ -23,7 +23,6 @@ module.exports = {
             {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
-                // loaders: ['react-hot', 'babel']
                 loaders: ['react-hot', 'babel']
             },
             {
@@ -55,10 +54,5 @@ module.exports = {
         new webpack.DefinePlugin({
             __DEVTOOLS__: true  // Enable react-devtools chrome extension
         }),
-    ],
-    // devServer: {
-    //     hot: true,
-    //     contentBase: './',
-    // },
-
+    ]
 };
