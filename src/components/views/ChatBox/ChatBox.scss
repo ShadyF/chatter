@@ -16,7 +16,7 @@
     margin: 0;
     height: 100%;
 
-    @media (max-width: 768px){
+    @media (max-width: 768px) {
       border: none;
     }
 
@@ -92,5 +92,54 @@
     border: none;
     box-shadow: none;
   }
+}
 
+.connectionWrapper {
+  text-align: center;
+  padding: 15px;
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  .spinner {
+    display: inline-block;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    border: .3rem solid rgba(black, 0.2);
+    border-top-color: black;
+    animation: spin 1s infinite linear;
+  }
+
+  .connectionTextWrapper {
+    display: block;
+    padding-top: 20px;
+
+    span {
+      display: inline-block;
+    }
+    .elipsis {
+      display: inline-block;
+      width: 10px;
+      text-align: left;
+    }
+    .elipsis:after {
+      overflow: hidden;
+      display: inline-block;
+      vertical-align: bottom;
+      animation: ellipsis steps(4, end) 2s infinite;
+      content: "\2026"; /* ascii code for the ellipsis character */
+      width: 0;
+    }
+
+    @keyframes ellipsis {
+      to {
+        width: 20px;
+      }
+    }
+  }
 }

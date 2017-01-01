@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import ReactDOM from 'react-dom'
 import {TransitionMotion, spring} from 'react-motion'
 import ScrollBars from 'react-custom-scrollbars'
 import moment from 'moment'
@@ -32,7 +31,7 @@ export default class ChatBox extends Component {
             color: "rgb(" + randRGB.r + ", " + randRGB.g + ", " + randRGB.b + ")"
         };
 
-        // Needed because create message access randColor
+        // Needed for createMessage to be able to access randColor
         this.createMessage = this.createMessage.bind(this);
     }
 
@@ -137,11 +136,14 @@ export default class ChatBox extends Component {
                         </ListGroup>
                     </ScrollBars>
                 </Panel>
-                <Modal show={!this.props.handle_set}>
+                <Modal show={!this.props.handle_set || this.props.connecting}>
+                    {!this.props.handle_set && !this.props.connecting &&
                     <Modal.Header>
                         <Modal.Title>Set your username!</Modal.Title>
-                    </Modal.Header>
+                    </Modal.Header>}
+
                     <Modal.Body>
+                        {!this.props.handle_set && !this.props.connecting &&
                         <form>
                             <FormGroup>
                                 <ControlLabel>Username</ControlLabel>
@@ -161,7 +163,16 @@ export default class ChatBox extends Component {
                                 disabled={this.props.handle.length < 2}>
                                 Set Username
                             </Button>
-                        </form>
+                        </form>}
+                        {this.props.connecting &&
+                        <div className={styles.connectionWrapper}>
+                            <div className={styles.spinner}></div>
+                            <div className={styles.connectionTextWrapper}>
+                                <span>Connecting to server</span>
+                                <div className={styles.elipsis}></div>
+                            </div>
+                        </div>
+                        }
                     </Modal.Body>
                 </Modal>
             </div>

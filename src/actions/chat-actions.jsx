@@ -36,3 +36,17 @@ export function messageFieldUpdate(message) {
     }
 }
 
+export function connectionEstablished(){
+    "use strict";
+    return {
+        type: types.CONNECTION_ESTABLISHED
+    }
+}
+
+export function connectionError() {
+    "use strict";
+    return {
+        type: types.CONNECTION_ERROR
+    }
+}
+

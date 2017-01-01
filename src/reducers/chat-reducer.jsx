@@ -2,6 +2,7 @@ import * as types from '../actions/action-types'
 import {socket} from '../utils/socket/socket'
 
 const initialState = {
+    connecting: true,
     handle: '',
     handle_set: false,
     message_field: '',
@@ -33,6 +34,12 @@ export default function (state = initialState, action) {
 
         case types.HANDLE_UPDATE:
             return Object.assign({}, state, {handle: action.handle});
+
+        case types.CONNECTION_ESTABLISHED:
+            return Object.assign({}, state, {connecting: false});
+
+        case types.CONNECTION_ERROR:
+            return Object.assign({}, state, {connecting: true});
 
         default:
             return state
