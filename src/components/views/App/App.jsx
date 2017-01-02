@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import {Col, Grid, Row} from 'react-bootstrap'
+import {Col, Grid, Row} from 'react-bootstrap/lib'
 
 import styles from './App.scss'
 

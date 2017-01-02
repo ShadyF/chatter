@@ -1,14 +1,14 @@
 import * as messageActions from '../../actions/chat-actions'
 import ReconnectingWebsocket from './reconnecting-websocket'
 
-const host = 'localhost';
+const host = 'chatter-backend.herokuapp.com';
 const port = 8000;
 
 let socket = null;
 
 function initListener(store) {
     "use strict";
-    socket = new ReconnectingWebsocket('ws://' + host + ':' + port + '/chat');
+    socket = new ReconnectingWebsocket('wss://' + host + '/chat');
 
     socket.onopen = () => {
         store.dispatch(messageActions.connectionEstablished())

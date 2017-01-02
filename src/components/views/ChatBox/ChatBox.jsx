@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {TransitionMotion, spring} from 'react-motion'
-import ScrollBars from 'react-custom-scrollbars'
+import ScrollBars from 'react-custom-scrollbars/lib'
 import moment from 'moment'
 import {
     FormGroup,
@@ -13,7 +13,7 @@ import {
     ListGroup,
     ListGroupItem,
     Modal
-} from 'react-bootstrap'
+} from 'react-bootstrap/lib'
 
 import styles from './ChatBox.scss'
 

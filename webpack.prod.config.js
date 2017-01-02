@@ -10,6 +10,8 @@ var projectRootPath = __dirname;
 module.exports = {
     devtool: 'cheap-module-source-map',
 
+    context: projectRootPath,
+
     entry: ['./src/app'],
 
     output: {
@@ -69,7 +71,9 @@ module.exports = {
         new webpack.optimize.UglifyJsPlugin({
             compress: {
                 warnings: false
-            }
+            },
+            comments: false,
+            minimize: true // not needed since we use the -p flag in npm run build
         })
     ]
 };
