@@ -4,7 +4,7 @@
   "description": "Chatting application",
   "main": "index.js",
   "scripts": {
-    "watch": "webpack  --progress --colors --watch --config ./webpack-dev.config.js",
+    "watch": "webpack  --progress --colors --watch --config ./webpack.prod.config.js -p",
     "build": "webpack --config ./webpack.prod.config.js -p",
     "dev-server": "./node_modules/.bin/webpack-dev-server --inline --hot --config ./webpack.dev.config.js"
   },
