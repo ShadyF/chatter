@@ -1,6 +1,7 @@
 //require our dependencies
 var path = require('path');
 var webpack = require('webpack');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 //the base directory (absolute path) for resolving the entry option
 var projectRootPath = __dirname;
@@ -51,6 +52,14 @@ module.exports = {
     },
 
     plugins: [
+        // Creates a new html files based on template.html and dynamically adds the css and js files bundled by webpack
+        // this was to avoid needing to change the directory of bundle.js when switching from development to production
+        // and vice-versa
+        new HtmlWebpackPlugin({
+            template: 'template.html',
+            inject: 'body'
+        }),
+
         new webpack.DefinePlugin({
             __DEVTOOLS__: true  // Enable react-devtools chrome extension
         }),

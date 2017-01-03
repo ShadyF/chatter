@@ -3,6 +3,7 @@ var path = require('path');
 var webpack = require('webpack');
 var CleanPlugin = require('clean-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 //the base directory (absolute path) for resolving the entry option
 var projectRootPath = __dirname;
@@ -63,6 +64,12 @@ module.exports = {
                 'NODE_ENV': JSON.stringify('production'),
             },
             __DEVTOOLS__: false
+        }),
+
+        new HtmlWebpackPlugin({
+            filename: '../index.html',
+            template: 'template.html',
+            inject: 'body'
         }),
 
         // optimizations
